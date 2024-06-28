@@ -6,9 +6,10 @@ using namespace std;
 #include "math_utilities/matrix_operations.hpp"
 #include "mef_utilities/mef_process.hpp"
 #include "gid/input_output.hpp"
+#include "math_utilities/linear_solver.hpp"
 
 int main (int argc, char** argv) {
-    if(argc != 3){
+    if(argc != 2){
         cout << "Incorrect use of the program, it must be: mef filename\n";
         exit(EXIT_FAILURE);
     }
@@ -20,8 +21,8 @@ int main (int argc, char** argv) {
     read_input(filename, &M);
     //M.report();
 
-    short num_nodes = M.get_quantity(NUM_NODES);
-    short num_elements = M.get_quantity(NUM_ELEMENTS);
+    long num_nodes = M.get_quantity(NUM_NODES);
+    long num_elements = M.get_quantity(NUM_ELEMENTS);
     Matrix K(num_nodes,num_nodes), local_Ks[num_elements];
     Vector b(num_nodes),           local_bs[num_elements];
 
@@ -41,19 +42,32 @@ int main (int argc, char** argv) {
     cout << "Applying Dirichlet Boundary Conditions...\n\n";
     apply_dirichlet_boundary_conditions(&K, &b, &M);
 
-    //K.show(); b.show();
+    //K.show(); 
+    //b.show();
 
     cout << "Solving global system...\n\n";
     Vector T(b.get_size()), T_full(num_nodes);
-    solve_system(&K, &b, &T, atoi(argv[2]));
+    //solve_system_recursive(&K, &b, &T);
+    //solve_system_cholesky(&K, &b, &T);
+    gauss_seidel(&K, &b, &T);
+
     //T.show();
     
+    /*cout << "\n\n\n";
+
+    product_matrix_by_vector(&K, &T, K.get_ncols(), K.get_nrows(), &R);
+    cout << "Showing aproximate result:\n";
+    R.show();
+    cout << "Showing real result:\n";
+    b.show();
+    cout << "\n\n\n";*/
+
     cout << "Preparing results...\n\n";
     merge_results_with_dirichlet(&T, &T_full, num_nodes, &M);
-    //T_full.show();
+    T_full.show();
 
     cout << "Writing output file...\n\n";
     write_output(filename, &T_full);
-
+    
     return 0;
 }
