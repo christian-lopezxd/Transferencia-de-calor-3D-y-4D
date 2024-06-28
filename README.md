@@ -40,5 +40,5 @@ Una vez compilado podremos elegir con que archivo queremos ejecutar nuestro prog
 .\main.exe MallaExtraFina
 ```
 
-Una vez hecho alguno de estos comandos se generará un archivo con la extencion .post.res en el cual se obtendran los valores de las temperaturas en cada uno de los nodos.
+Una vez hecho alguno de estos comandos se generará un archivo con la extencion ***.post.res*** en el cual se obtendran los valores de las temperaturas en cada uno de los nodos.
 
