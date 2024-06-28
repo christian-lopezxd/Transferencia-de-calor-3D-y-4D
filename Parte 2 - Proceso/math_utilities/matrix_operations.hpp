@@ -51,7 +51,7 @@ float determinant_auxiliar(Matrix* M){
     return acc;
 }
 
-float determinant(Matrix* M){ 
+float determinant(Matrix* M){
     float ans;
     switch(M->get_ncols()){
         case 1: ans = M->get(0,0); break;
@@ -109,8 +109,8 @@ void calculate_inverse(Matrix* M, int n, Matrix* R){
     //R->show();
 }
 
-void calculate_inverse_Cholesky(Matrix* A, int n, Matrix* X){
-    Matrix L(n,n), Y(n,n);
+void cholesky_inverse(Matrix *A, int n,  Matrix *X){
+  Matrix L(n,n), Y(n,n);
     float acum;
 
     for(int i= 0; i < n; i++){
@@ -120,8 +120,7 @@ void calculate_inverse_Cholesky(Matrix* A, int n, Matrix* X){
                 for(int k = 0; k < j; k++){
                     acum += pow(L.get(j,k),2);
                 }
-                float rad = A->get(j,j) - acum;
-                L.set( ((rad<=0)?0.000001:sqrt(rad)) ,j,j);
+                L.set(sqrt(A->get(j,j) - acum),j,j);
             }
             else{
                 if(i > j){
