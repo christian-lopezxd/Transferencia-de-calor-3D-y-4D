@@ -1,0 +1,8 @@
+Tiempos estimados para compilación de mallados
+700 nodos -> 1 minuto a 2 minutos
+400 nodos -> 10 minutos a 25 minutos
+15000 nodos -> 3 horas a 4 horas
+
+Especificaciones de la maquina 
+Procesador -> intel core i5 13th generación 
+RAM -> 16 Gb
