@@ -1,15 +1,34 @@
-#ifndef NODE_HPP
-#define NODE_HPP
+class Node {
+    private:
+        int ID;
+        float x_coordinate;
+        float y_coordinate;
 
-struct Node {
-    int id;
-    double x_coordinate, y_coordinate;
-    Node* left;
-    Node* right;
-    Node* parent;
+    public:
+        Node(int identifier, float x_value, float y_value){
+            ID = identifier;
+            x_coordinate = x_value;
+            y_coordinate = y_value;
+        }
 
-    Node(int identifier, double coordX, double coordY)
-        : id(identifier), x_coordinate(coordX), y_coordinate(coordY), left(nullptr), right(nullptr), parent(nullptr) {}
+        void set_ID(int identifier){
+            ID = identifier;
+        }
+        int get_ID(){
+            return ID;
+        }
+
+        void set_x_coordinate(float x_value){
+            x_coordinate = x_value;
+        }
+        float get_x_coordinate(){
+            return x_coordinate;
+        }
+
+        void set_y_coordinate(float y_value){
+            y_coordinate = y_value;
+        }
+        float get_y_coordinate(){
+            return y_coordinate;
+        }
 };
-
-#endif

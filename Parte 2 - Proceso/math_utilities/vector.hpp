@@ -1,116 +1,62 @@
-#ifndef VECTOR_HPP
-#define VECTOR_HPP
-
-#include <iostream>
-#include <cstdlib>
-
-using namespace std;
-
 class Vector {
-private:
-    int size;
-    float* data;
+    private:
+        int size;
+        float* data;
 
-    void create() {
-        data = (float*)malloc(sizeof(float) * size);
-        if (data == nullptr) {
-            cerr << "Memory allocation failed!" << endl;
-            exit(EXIT_FAILURE);
+        void create(){
+            data = (float*) malloc(sizeof(float) * size);
         }
-    }
 
-public:
-    Vector() : size(0), data(nullptr) {}
-
-    Vector(int num_values) : size(num_values) {
-        create();
-        init();
-    }
-
-    ~Vector() {
-        if (data != nullptr) {
+    public:
+        Vector(){}
+        Vector(int data_qty){
+            size = data_qty;
+            create();
+        }
+        ~Vector(){
             free(data);
         }
-    }
 
-    void init() {
-        for (int i = 0; i < size; ++i) {
-            data[i] = 0.0f;
+        void init(){
+            for(int i = 0; i < size; i++)
+                data[i] = 0;
         }
-    }
 
-    void setSize(int num_values) {
-        if (data != nullptr) {
-            free(data);
+        void set_size(int num_values){
+            size = num_values;
+            create();
         }
-        size = num_values;
-        create();
-        init();
-    }
+        int get_size(){
+            return size;
+        }
 
-    int getSize() const {
-        return size;
-    }
-
-    void set(float value, int position) {
-        if (position >= 0 && position < size) {
+        void set(float value, int position){
             data[position] = value;
-        } else {
-            cerr << "Index out of bounds!" << endl;
         }
-    }
-
-    void add(float value, int position) {
-        if (position >= 0 && position < size) {
+        void add(float value, int position){
             data[position] += value;
-        } else {
-            cerr << "Index out of bounds!" << endl;
         }
-    }
-
-    float get(int position) const {
-        if (position >= 0 && position < size) {
+        float get(int position){
             return data[position];
-        } else {
-            cerr << "Index out of bounds!" << endl;
-            return 0.0f; // Valor por defecto en caso de error
-        }
-    }
-
-    void removeRow(int row) {
-        if (row < 0 || row >= size) {
-            cerr << "Index out of bounds!" << endl;
-            return;
         }
 
-        int newSize = size - 1;
-        float* newData = (float*)malloc(sizeof(float) * newSize);
-        if (newData == nullptr) {
-            cerr << "Memory allocation failed!" << endl;
-            exit(EXIT_FAILURE);
+        void remove_row(int row){
+            int neo_index = 0;
+            float* neo_data = (float*) malloc(sizeof(float) * (size-1));
+            for(int i = 0; i < size; i++)
+                if(i != row){
+                    neo_data[neo_index] = data[i];
+                    neo_index++;
+                }
+            free(data);
+            data = neo_data;
+            size--;
         }
 
-        for (int i = 0, j = 0; i < size; ++i) {
-            if (i != row) {
-                newData[j++] = data[i];
-            }
+        void show(){
+            cout << "[ " << data[0];
+            for(int i = 1; i < size; i++)
+                cout << "; " << data[i];
+            cout << " ]\n\n";
         }
-
-        free(data);
-        data = newData;
-        size = newSize;
-    }
-
-    void show() const {
-        cout << "[ ";
-        for (int i = 0; i < size; ++i) {
-            cout << data[i];
-            if (i < size - 1) {
-                cout << "; ";
-            }
-        }
-        cout << " ]" << endl;
-    }
 };
-
-#endif
