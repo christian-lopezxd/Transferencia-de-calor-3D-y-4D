@@ -1,5 +1,7 @@
 #include <cmath>
 
+//Decidimos implementar el metodo de Gauss Seidel para que la compilación no tarde un montón
+
 void gauss_seidel(Matrix* K, Vector* b, Vector* T) {
   unsigned int n = K->get_ncols();
   float aux_sum = 0.0f;

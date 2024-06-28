@@ -32,35 +32,21 @@ int main (int argc, char** argv) {
     cout << "Performing Assembly...\n\n";
     assembly(&K, &b, local_Ks, local_bs, num_elements, &M);
 
-    //K.show(); b.show();
 
     cout << "Applying Neumann Boundary Conditions...\n\n";
     apply_neumann_boundary_conditions(&b, &M);
 
-    //b.show();
 
     cout << "Applying Dirichlet Boundary Conditions...\n\n";
     apply_dirichlet_boundary_conditions(&K, &b, &M);
 
-    //K.show(); 
-    //b.show();
-
     cout << "Solving global system...\n\n";
     Vector T(b.get_size()), T_full(num_nodes);
-    //solve_system_recursive(&K, &b, &T);
-    //solve_system_cholesky(&K, &b, &T);
+ 
+    //solve_system(&K, &b, &T, atoi(argv[2]));
+    //mandamos a llamar el metodo de gauss seidel en lugar del original
     gauss_seidel(&K, &b, &T);
 
-    //T.show();
-    
-    /*cout << "\n\n\n";
-
-    product_matrix_by_vector(&K, &T, K.get_ncols(), K.get_nrows(), &R);
-    cout << "Showing aproximate result:\n";
-    R.show();
-    cout << "Showing real result:\n";
-    b.show();
-    cout << "\n\n\n";*/
 
     cout << "Preparing results...\n\n";
     merge_results_with_dirichlet(&T, &T_full, num_nodes, &M);

@@ -3,12 +3,14 @@ class Node {
         long ID;
         float x_coordinate;
         float y_coordinate;
+        //agragamos otra cordenada en el nodo
         float z_coordinate;
     public:
         Node(long identifier, float x_value, float y_value, float z_value){
             ID = identifier;
             x_coordinate = x_value;
             y_coordinate = y_value;
+            //modificamos para aceptar otro valor
             z_coordinate = z_value;
         }
 
@@ -33,6 +35,7 @@ class Node {
             return y_coordinate;
         }
 
+        //agregamos las respectivas  funciones
         void set_z_coordinate(float z_value){
             z_coordinate = z_value;
         }

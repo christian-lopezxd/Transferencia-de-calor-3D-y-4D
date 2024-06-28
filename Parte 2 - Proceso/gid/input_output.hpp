@@ -17,8 +17,11 @@ void read_input(string filename, Mesh* M){
 
     for(int i = 0; i < num_nodes; i++){
         long id;
+        //agregamos una nueva cordenada
         float x, y, z;
+        //modificamos para que el programa sea capaz de leer la cordenada z
         dat_file >> id >> x >> y >> z;
+        //insertamos el nuevo nodo
         M->insert_node(new Node(id,x,y,z), i);
     }
 

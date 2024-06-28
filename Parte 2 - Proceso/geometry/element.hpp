@@ -4,6 +4,7 @@ class Element {
         Node* node1;
         Node* node2;
         Node* node3;
+        //Agregamos otro nodo 
         Node* node4;
     public:
         Element (long identifier, Node* first_node, Node* second_node, Node* third_node, Node* fourth_node){
@@ -11,6 +12,7 @@ class Element {
             node1 = first_node;
             node2 = second_node;
             node3 = third_node;
+            //igualamos el nuevo nodo al que le corresponde
             node4 = fourth_node;
         }
 
@@ -42,6 +44,7 @@ class Element {
             return node3;
         }
 
+        //agregamos los setters del cuarto nodo
         void set_node4(Node* node){
             node4 = node;
         }
