@@ -1,5 +1,4 @@
 #include <cmath>
-
 #include "vector.hpp"
 #include "matrix.hpp"
 
