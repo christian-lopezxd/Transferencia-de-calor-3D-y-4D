@@ -1,6 +1,6 @@
 #include <cmath>
 
-//Decidimos implementar el metodo de Gauss Seidel para que la compilación no tarde un montón
+// Se implementa el método de Gauss Seidel para reducir el tiempo de compilación
 
 void gauss_seidel(Matrix* K, Vector* b, Vector* T) {
   unsigned int n = K->get_ncols();
