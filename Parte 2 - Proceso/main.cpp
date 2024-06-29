@@ -44,7 +44,7 @@ int main (int argc, char** argv) {
     Vector T(b.get_size()), T_full(num_nodes);
  
     //solve_system(&K, &b, &T, atoi(argv[2]));
-    //mandamos a llamar el metodo de gauss seidel en lugar del original
+    //Llamamos al método de Gauss Seidel
     gauss_seidel(&K, &b, &T);
 
 
